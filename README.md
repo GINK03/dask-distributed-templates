@@ -29,7 +29,14 @@ $ nc -v -w 1 192.168.14.15 -z 8786
 
 Workerは命令を受けるマシンなので、別のマシンなどがよい
 ```console
-$ dask-worker ${SCHEDULER-HOST}:8786
+$ dask-worker ${SCHEDULER}:8786
+```
+
+**クライアントのCPU数**  
+マルチコアの場合、CPU数を多めに取ってやったりする
+
+```console
+$ dask-worker ${SCHEDULER}:8786 --nprocs 12
 ```
 
 ## 簡単な命令(数字を増やすだけ)
