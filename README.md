@@ -31,3 +31,21 @@ Workerは命令を受けるマシンなので、別のマシンなどがよい
 ```console
 $ dask-worker ${SCHEDULER-HOST}:8786
 ```
+
+## 簡単な命令(数字を増やすだけ)
+```python
+from distributed import Client
+
+client = Client('192.168.14.13:8786')
+
+def inc(x):
+  return x + 1
+
+x = client.submit(inc, 10)
+print(x.result())
+
+L = client.map(inc, range(1000))
+
+ga = client.gather(L)
+print(ga)
+```
