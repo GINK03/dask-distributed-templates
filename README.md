@@ -46,7 +46,9 @@ from distributed import Client
 client = Client('192.168.14.13:8786')
 
 def inc(x):
-  return x + 1
+  for i in range(10000000):
+    x += i
+  return x
 
 x = client.submit(inc, 10)
 print(x.result())
