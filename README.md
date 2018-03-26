@@ -105,5 +105,10 @@ $ python3 parse-adult.py
 **workerの台数で分散処理してグリッドサーチ**  
 ```console
 $ time python3 adult.py
+...
+real    2m24.923s
+user    0m5.950s
+sys     0m0.951s
 ```
+10分以上かかる処理が2分程度に圧縮できました！
 
