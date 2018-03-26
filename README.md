@@ -6,10 +6,11 @@ dask.distributedの使い方と、具体例集です
 
 **daskのインストール**  
 ```console
-$ sudo pip3 install dask
+$ sudo pip3 install dask distribute --upgrade
 ```
 
-**nodeのインストール(Ubuntu)**  
+**nodeのインストール(Ubuntu)**  
+注：パッケージが微妙に古くてpip経由の方がいい
 ```console
 $ sudo apt install python3-distributed
 ```
