@@ -2,7 +2,15 @@
 
 dask.distributedの使い方と、具体例集です
 
-## setup
+## Dask.Distributedの簡単な理解
+一種の分散処理フレームワークになっており、便利です。  
+Celeryとかでもやったことをがあるのですが、Remote Procedureのそれよりまともでより整理された方法で、concurrent.futureのリモート版とも考えられます。  
+
+<p align="center">
+  <img width="550px" src="https://user-images.githubusercontent.com/4949982/37904798-c2d3f6d4-3137-11e8-9ffd-fb9af56822d8.png">
+</p>
+
+## ネットワークのsetup
 
 **daskのインストール**  
 ```console
@@ -16,7 +24,7 @@ $ sudo apt install python3-distributed
 ```
 
 ## Dask SchedulerとWorkerのセットアップ
-Schedulerは分析を実行するマシンとかでいいはず
+Schedulerは分析を実行するマシンとかでもいいです
 ```console
 $ dask-scheduler
 Start scheduler at 192.168.14.15:8786
