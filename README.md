@@ -65,3 +65,20 @@ print(ga)
 <p align="center">
   <img width="500px" src="https://user-images.githubusercontent.com/4949982/37890533-d730c30e-310b-11e8-964a-d082654f64ef.png">
 </p>
+
+## 分散した命令の結果を受け取る２つの方法
+clientにmapされた命令はschedulerが管理して分散処理されますが、内部で、マシン台数かなにかでchunkされているらしく、順番が一気に結果を見るのも、個別にみるのもあまり変わりがないようです。
+
+gatherという関数で一気に集められますが戻り値が多いときには、オンメモリにするのが難しいので、挙動が不安です。  
+```python
+L = client.map(inc, range(1000))
+ga = client.gather(L)
+```
+
+resultで一個一個取っていく方法は、ブロッキングされているので、遅いですがメモリ節約にはなりそうです
+```python
+L = client.map(inc, args)
+for l in L:
+  print(l.result())
+```
+
