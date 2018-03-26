@@ -90,12 +90,40 @@ for l in L:
   print(l.result())
 ```
 
-## モデルのグリッドサーチでも便利
-パラメータを少しずつ変えながらもっとも、パフォーマンスが良いパラメータを探すグリッドサーチというものあって、マシンパワーでゴリ押ししてしまうのが都合がいいのです。  
+## 機械学習のモデルのグリッドサーチでも便利
+機械学習のパラメータを少しずつ変えながらもっとも、パフォーマンスが良いパラメータを総当りで探すグリッドサーチというものあって、マシンパワーでゴリ押ししてしまうのが都合がいいのです。  
 
 複数台のworkerでグリッドサーチさせると、そのマシンの台数分だけ減らせます。  
 
 代表的なUCIのadult incomeデータセットでランダムフォレストでパラメータを2x10x10x15=3000通りという膨大なパラメータサーチであっても、割と早く終わらせることができます。  
+
+以下のコードの例では、パラメータの組み合わせを作って、分散処理で評価させています。  
+
+関数doはworkerで実行されて、ホームディレクトリ以下のデータセットを読み込んで、引数に与えられたRandomForestのパラメータを適応して学習し、テストデータでの精度を見ています。  
+
+```python
+def do(param):
+  dataset = pickle.load(open(f'{os.environ["HOME"]}/dataset.pkl', 'rb'))
+  Xs, ys, Xst, yst = dataset
+
+  criterion, n_estimators, max_features, max_depth = param
+  model = RandomForestClassifier(n_estimators=n_estimators, criterion=criterion, max_features=max_features, max_depth=max_depth)
+  model.fit(Xs, ys)
+  ysp = model.predict(Xst)
+  acc = accuracy_score(yst, ysp)
+  print(acc)
+  return [acc, list(param)]
+
+params = []
+for cri in ['gini', 'entropy']:
+  for n_esti in range(5,15):
+    for max_features in range(10,20):
+      for max_depth in range(4, 20):
+        params.append( (cri, n_esti, max_features, max_depth) )
+L = client.map(do, params)
+
+ga = client.gather(L)
+```
 
 **adult incomeのデータを学習可能かデータに変換**  
 ```console
