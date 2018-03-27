@@ -151,7 +151,7 @@ progress(L) # このようにする
 ga = client.gather(L)
 ```
 <p align="center">
-  <img width="500px" src="https://user-images.githubusercontent.com/4949982/37947348-8e70b20e-31c5-11e8-8410-430c5b32ffb2.png">
+  <img width="700px" src="https://user-images.githubusercontent.com/4949982/37947348-8e70b20e-31c5-11e8-8410-430c5b32ffb2.png">
 </p>
 
 ## dask.distributedで注意すべき点
