@@ -41,8 +41,10 @@ $ dask-worker ${SCHEDULER}:8786
 ```
 
 **クライアントのCPU数**  
+
 マルチコアの場合、CPU数を多めに取ってやったりする
 
+nprocsオプションで最大のworkerでの並列数を指定できます  
 ```console
 $ dask-worker ${SCHEDULER}:8786 --nprocs 12
 ```
