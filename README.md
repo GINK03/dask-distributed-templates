@@ -143,6 +143,17 @@ sys     0m0.951s
 ```
 10分以上かかる処理が2分程度に圧縮できました！
 
+**progress barの表示**  
+client.map, client.submitをprogress関数でラップすることで、進捗を確認することができます  
+```python
+L = client.map(do, params)
+progress(L) # このようにする
+ga = client.gather(L)
+```
+<p align="center">
+  <img width="500px" src="https://user-images.githubusercontent.com/4949982/37947348-8e70b20e-31c5-11e8-8410-430c5b32ffb2.png">
+</p>
+
 ## dask.distributedで注意すべき点
 dask.distributedで関数の引数に大きすぎるデータ（100MByte）を超えるものを投入すると警告が出るし、転送も早くありません。  
 
