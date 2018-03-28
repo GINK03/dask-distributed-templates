@@ -29,6 +29,9 @@ $ sudo apt install python3-distributed
 
 ## Dask SchedulerとWorkerのセットアップ
 Schedulerは分析を実行するマシン、クライアントマシンなど任意のマシンでいいはずです  
+
+(今回はschedulerを起動するマシンは192.168.14.13のIPアドレスを持つとしています)  
+
 ```console
 $ dask-scheduler
 Start scheduler at 192.168.14.13:8786
