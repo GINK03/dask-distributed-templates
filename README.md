@@ -1,5 +1,4 @@
-# dask-distributed-templates
-
+# dask.distributedで分散処理
 dask.distributedの使い方と、具体例集です
 
 ## dask.distributedの簡単な理解
