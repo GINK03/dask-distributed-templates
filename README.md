@@ -29,12 +29,12 @@ $ sudo apt install python3-distributed
 Schedulerは分析を実行するマシン、クライアントマシンなど任意のマシンでいいはずです  
 ```console
 $ dask-scheduler
-Start scheduler at 192.168.14.15:8786
+Start scheduler at 192.168.14.13:8786
 ```
 
 **portのチェック**  
 ```console
-$ nc -v -w 1 192.168.14.15 -z 8786
+$ nc -v -w 1 192.168.14.13 -z 8786
 ```
 
 Workerは命令を受け実際に計算するマシンなので、別のマシンになります  
@@ -48,22 +48,23 @@ $ dask-worker ${SCHEDULER}:8786 --nprocs 12
 ## 簡単な命令(数字を増やすだけ)
 簡単な命令で、数字を足し合わせて行くだけのプログラムですが、100回引数を変えて行おうとすると、計算時間がかかります。  
 
-```python
-from distributed import Client
+今回、5台のマシンで一台あたり12並列数で行うので、合計60並列で処理します。  
 
-client = Client('192.168.14.13:8786')
+ClientでschedulerのIPアドレスとportを指定して、以下のようなコードを実行するだけで、複数のマシンで並列計算をすることができます。　　
 
-def inc(x):
-  for i in range(10000000):
-    x += i
-  return x
+```python:add.py
+from distributed import Client         
+ 
+client = Client('192.168.14.13:8786')  
+ 
+def inc(x):                            
+  for i in range(10000000):            
+    x += i                             
+  return x                             
+ 
+L = client.map(inc, range(1000))       
 
-x = client.submit(inc, range(100))
-print(x.result())
-
-L = client.map(inc, range(1000))
-
-ga = client.gather(L)
+ga = client.gather(L)                 
 print(ga)
 ```
 
