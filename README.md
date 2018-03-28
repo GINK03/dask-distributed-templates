@@ -2,7 +2,7 @@
 
 dask.distributedの使い方と、具体例集です
 
-## Dask.Distributedの簡単な理解
+## dask.distributedの簡単な理解
 一種の分散処理フレームワークになっており、便利です。  
 Celeryとかでもやったことをがあるのですが、Remote Procedureのそれよりまともでより整理された方法で、concurrent.futureのリモート版とも考えられます。  
 
@@ -10,21 +10,23 @@ Celeryとかでもやったことをがあるのですが、Remote Procedureの�
   <img width="550px" src="https://user-images.githubusercontent.com/4949982/37904798-c2d3f6d4-3137-11e8-9ffd-fb9af56822d8.png">
 </p>
 
-## ネットワークのsetup
+## dask.distributedのインストール
 
-**daskのインストール**  
+**pip経由でのdaskのインストール**  
 ```console
-$ sudo pip3 install dask distribute --upgrade
+$ sudo pip3 install dask 
+$ sudo pip3 install distribute
 ```
 
-**nodeのインストール(Ubuntu)**  
-注：パッケージが微妙に古くてpip経由の方がいい
+**ubuntuでのインストール**  
+
+注：パッケージが微妙に古くてpip経由の方がいいです
 ```console
 $ sudo apt install python3-distributed
 ```
 
 ## Dask SchedulerとWorkerのセットアップ
-Schedulerは分析を実行するマシンとかでもいいです
+Schedulerは分析を実行するマシン、クライアントマシンなど任意のマシンでいいはずです  
 ```console
 $ dask-scheduler
 Start scheduler at 192.168.14.15:8786
@@ -35,7 +37,8 @@ Start scheduler at 192.168.14.15:8786
 $ nc -v -w 1 192.168.14.15 -z 8786
 ```
 
-Workerは命令を受けるマシンなので、別のマシンなどがよい
+Workerは命令を受け実際に計算するマシンなので、別のマシンになります  
+${SCHEDULER}にはschedulerを起動したマシンのIPが入ります  
 ```console
 $ dask-worker ${SCHEDULER}:8786
 ```
