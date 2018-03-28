@@ -142,9 +142,9 @@ real    2m24.923s
 user    0m5.950s
 sys     0m0.951s
 ```
-10分以上かかる処理が2分程度に圧縮できました！
+10分以上かかる処理が2分半程度に圧縮できました！
 
-**progress barの表示**  
+## progress barの表示  
 client.map, client.submitをprogress関数でラップすることで、進捗を確認することができます  
 ```python
 L = client.map(do, params)
