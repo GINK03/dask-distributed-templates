@@ -39,20 +39,15 @@ $ nc -v -w 1 192.168.14.15 -z 8786
 
 Workerは命令を受け実際に計算するマシンなので、別のマシンになります  
 ${SCHEDULER}にはschedulerを起動したマシンのIPが入ります  
-```console
-$ dask-worker ${SCHEDULER}:8786
-```
 
-**クライアントのCPU数**  
-
-マルチコアの場合、CPU数を多めに取ってやったりする
-
-nprocsオプションで最大のworkerでの並列数を指定できます  
+nprocsオプションで最大のworkerでの並列数(同時に関数が走る数)を指定できます  
 ```console
 $ dask-worker ${SCHEDULER}:8786 --nprocs 12
 ```
 
 ## 簡単な命令(数字を増やすだけ)
+簡単な命令で、数字を足し合わせて行くだけのプログラムですが、100回引数を変えて行おうとすると、計算時間がかかります。  
+
 ```python
 from distributed import Client
 
@@ -63,7 +58,7 @@ def inc(x):
     x += i
   return x
 
-x = client.submit(inc, 10)
+x = client.submit(inc, range(100))
 print(x.result())
 
 L = client.map(inc, range(1000))
