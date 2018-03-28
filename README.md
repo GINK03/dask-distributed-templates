@@ -134,6 +134,8 @@ $ python3 parse-adult.py
 ```
 **出力されたdataset.pklを各workerのホームディレクトに配置**  
 
+関数の引数に学習用のデータを含めると、遅くなったり、警告がでたりするので、大規模なデータの際はscpで転送する、S3, GCSを利用するなどが良いようです。  
+
 **workerの台数で分散処理してグリッドサーチ**  
 ```console
 $ time python3 adult.py
