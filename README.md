@@ -4,7 +4,10 @@ dask.distributedの使い方と、具体例集です
 
 ## dask.distributedの簡単な理解
 一種の分散処理フレームワークになっており、便利です。  
-Celeryとかでもやったことをがあるのですが、Remote Procedureのそれよりまともでより整理された方法で、concurrent.futureのリモート版とも考えられます。  
+
+[ドキュメント](https://distributed.readthedocs.io/en/latest/)やgithubはdaskから[dask.distributed](https://github.com/dask/distributed)は分割されており、DataFrameの取扱以外のより汎用的な分散処理を含んでいるようです。
+
+Celeryとかでもやったことをがあるのですが、Remote Procedureのそれよりまともでより整理された方法で、concurrent.futureのリモート版とも考えられます。  
 
 <p align="center">
   <img width="550px" src="https://user-images.githubusercontent.com/4949982/37904798-c2d3f6d4-3137-11e8-9ffd-fb9af56822d8.png">
