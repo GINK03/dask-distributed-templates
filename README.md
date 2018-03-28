@@ -17,7 +17,7 @@ Celeryとかでもやったことをがあるのですが、Remote Procedureの�
 **pip経由でのdaskのインストール**  
 ```console
 $ sudo pip3 install dask 
-$ sudo pip3 install distribute
+$ sudo pip3 install distributed
 ```
 
 **ubuntuでのインストール**  
