@@ -46,7 +46,7 @@ $ dask-worker ${SCHEDULER}:8786 --nprocs 12
 ```
 
 ## Dask.Distributedの並列マシン数と、速度の関係
-上記の簡単な足し算を並列マシン（worker数の増加）でやろうとすると、処理時間がほぼ反比例の関係で下がるので、効率的に分散処理できていることが確認できます。
+下記にある簡単な足し算を並列マシン（worker数の増加）でやろうとすると、処理時間がほぼ反比例の関係で下がるので、効率的に分散処理できていることが確認できます。
 
 <p align="center">
   <img width="500px" src="https://user-images.githubusercontent.com/4949982/37890533-d730c30e-310b-11e8-964a-d082654f64ef.png">
